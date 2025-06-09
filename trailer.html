@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title> Trailler page </title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="codered.css">
+    </head>
+    <body>
+
+        
+        <div class="LoadingScreen">
+    <div class="spinner">
+        <div></div>   
+        <div></div>    
+        <div></div>    
+        <div></div>    
+        <div></div>    
+        <div></div>    
+        <div></div>    
+        <div></div>    
+        <div></div>    
+        <div></div>    
+    </div>
+</div>
+        
+                <div class="trailer">
+                <div class="trailer-extras"></div>
+                <div class="landing-content">
+                    <div class="trailer-content-inner">"Code Red"</div>
+                    <div class="trailer-video">
+    <iframe width="560" height="315"
+            src="https://www.youtube.com/embed/hdbM6ekEQzY"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+            
+    </iframe>
+    
+                    </div>
+                    <div class="trailer-content-sub">Watch our gripping trailer "Code Red". Set in Soviet Russia, in a time of financial turmoil.</div>
+                    </div>
+            </div>
+ 
+
+                <!-- Update the navbar section in each .html file -->
+
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="landing.html" onclick="return !isCurrentPage('landing.html')">Landing</a></li>
+                <li><a href="trailer.html" onclick="return !isCurrentPage('trailer.html')">Trailer</a></li>
+                <li><a href="aboutus.html" onclick="return !isCurrentPage('aboutus.html')">About</a></li>
+                <li><a href="pricing.html" onclick="return !isCurrentPage('pricing.html')">Pricing</a></li>
+                <li><a href="gallery.html" onclick="return !isCurrentPage('gallery.html')">Gallery</a></li>
+            </ul>
+        </nav>
+
+
+            <script>
+    function wrapLetters(selector, delayIncrement = 0.3) {
+        const el = document.querySelector(selector);
+        if (!el) return;
+        const text = el.textContent;
+        el.innerHTML = '';
+        [...text].forEach((char, index) => {
+            const span = document.createElement('span');
+            span.textContent = char;
+            if (char === ' ') {
+                span.classList.add('space');
+            }
+            const floatDelay = (index * delayIncrement).toFixed(2);
+            span.style.animation = `flicker 3s infinite ease-in-out 0s, floatSingle 4.5s infinite cubic-bezier(0.4, 0, 0.2, 1) ${floatDelay}s`;
+            el.appendChild(span);
+        });
+    }
+
+    // Update these selectors for each page
+    wrapLetters('.trailer-content-inner');
+    wrapLetters('.trailer-content-sub');
+
+
+
+    // Add to each page's script section
+function isCurrentPage(href) {
+    return window.location.pathname.endsWith(href);
+}
+
+// Add this to each page's script section, before the loading screen handler
+const currentPage = window.location.pathname.split('/').pop();
+const loadingScreen = document.querySelector('.LoadingScreen');
+const loadingContent = document.querySelector('.loading-content-inner');
+
+// Only show loading screen for actual page transitions
+if (document.referrer === '' || !document.referrer.includes(currentPage)) {
+    loadingScreen.style.display = 'flex';
+} else {
+    loadingScreen.style.display = 'none';
+}
+
+// Update the loading screen handler
+window.addEventListener('load', () => {
+    if (loadingScreen.style.display === 'flex') {
+        setTimeout(() => {
+            loadingScreen.style.opacity = '0';
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+            }, 1000);
+       }, 3000); // Changed to 3000ms (3 seconds)
+    }
+});
+
+// Update the fallback timeout
+setTimeout(() => {
+    if (loadingScreen.style.display === 'flex') {
+        loadingScreen.style.opacity = '0';
+        setTimeout(() => {
+            loadingScreen.style.display = 'none';
+        }, 1000);
+    }
+}, 5000);
+</script>
+
+
+    </body>
+</html>
+

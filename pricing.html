@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="codered.css">
+        <title>1.2 base</title>
+    </head>
+    <body>
+
+
+        
+        <div class="LoadingScreen">
+    <div class="spinner">
+        <div></div>   
+        <div></div>    
+        <div></div>    
+        <div></div>    
+        <div></div>    
+        <div></div>    
+        <div></div>    
+        <div></div>    
+        <div></div>    
+        <div></div>    
+    </div>
+</div>
+
+
+
+
+                <div class="pricing">
+    <div class="pricing-content">
+        <div class="pricing-content-inner">Pricing Options</div>
+        <div class="pricing-section">
+            <h2>Our Editions For Sale</h2>
+            <p class="pricing-intro">We offer a range of editions to suit different preferences and budgets.</p>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Standard Edition</h3>
+                    <p>$25.99</p>
+                    <p class="plan">Most popular Edition</p>
+                </div>
+                <div class="pricing-card">
+                    <h3>Premium Edition</h3>
+                    <p>$30.99</p>
+                    <p class="plan">Upgraded resolution, enhanced textures</p>
+                </div>
+                <div class="pricing-card">
+                    <h3>Ultimate Edition</h3>
+                    <p>$35.99</p>
+                    <p class="plan">All assets included</p>
+                </div>
+                <div class="pricing-card">
+                    <h3>Editors Cut</h3>
+                    <p>$40.99</p>
+                    <p class="plan">Extras included</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="landing.html" onclick="return !isCurrentPage('landing.html')">Landing</a></li>
+                <li><a href="trailer.html" onclick="return !isCurrentPage('trailer.html')">Trailer</a></li>
+                <li><a href="aboutus.html" onclick="return !isCurrentPage('aboutus.html')">About</a></li>
+                <li><a href="pricing.html" onclick="return !isCurrentPage('pricing.html')">Pricing</a></li>
+                <li><a href="gallery.html" onclick="return !isCurrentPage('gallery.html')">Gallery</a></li>
+            </ul>
+        </nav>
+
+        <script>
+    function wrapLetters(selector, delayIncrement = 0.3) {
+        const el = document.querySelector(selector);
+        if (!el) return;
+        const text = el.textContent;
+        el.innerHTML = '';
+        [...text].forEach((char, index) => {
+            const span = document.createElement('span');
+            span.textContent = char;
+            if (char === ' ') {
+                span.classList.add('space');
+            }
+            const floatDelay = (index * delayIncrement).toFixed(2);
+            span.style.animation = `flicker 3s infinite ease-in-out 0s, floatSingle 4.5s infinite cubic-bezier(0.4, 0, 0.2, 1) ${floatDelay}s`;
+            el.appendChild(span);
+        });
+    }
+
+    // Update these selectors for each page
+    wrapLetters('.pricing-content-inner'); // For pricing.html
+    wrapLetters('.pricing-content-sub');
+    wrapLetters('.pricing-intro'); // For pricing.html	
+    wrapLetters('.pricing-section h2'); // For pricing.html
+    wrapLetters('.pricing-card h3'); // For pricing.html
+    wrapLetters('.pricing-card p'); // For pricing.html
+    wrapLetters('.plan'); // For pricing.html
+
+
+    // Add to each page's script section
+    const currentPage = window.location.pathname.split('/').pop();
+    const loadingScreen = document.querySelector('.LoadingScreen');
+    const loadingContent = document.querySelector('.loading-content-inner');
+
+    // Only show loading screen for actual page transitions
+    if (document.referrer === '' || !document.referrer.includes(currentPage)) {
+        loadingScreen.style.display = 'flex';
+    } else {
+        loadingScreen.style.display = 'none';
+    }
+
+    // Loading screen handler
+    window.addEventListener('load', () => {
+        if (loadingScreen.style.display === 'flex') {
+            setTimeout(() => {
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 1000);
+         }, 3000); // Changed to 3000ms (3 seconds)
+        }
+    });
+
+    // Fallback in case load event doesn't fire
+    setTimeout(() => {
+        if (loadingScreen.style.display === 'flex') {
+            loadingScreen.style.opacity = '0';
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+            }, 1000);
+        }
+    }, 5000);
+
+    // Add to each page's script section
+    function isCurrentPage(href) {
+        return window.location.pathname.endsWith(href);
+    }
+</script>
+
+    </body>
+
+
+
+
+
+</html>
